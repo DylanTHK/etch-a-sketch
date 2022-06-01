@@ -8,6 +8,10 @@ const gridText = document.getElementById("gridSizeText");
 const grids = document.getElementsByClassName("gridElements");
 const gridArea = document.getElementById("sketch-pad");
 
+let mouseDown = false;
+document.body.onmousedown = () => {mouseDown = true};
+document.body.onmouseup = () => {mouseDown = false};
+
 // detect changes to call functions
 gridSize.onchange = (element) => initialiseGrid(element.target.value);
 grids.onclick = (cell) => updateColour(cell);
@@ -22,12 +26,20 @@ function initialiseGrid(n) {
         for (let j = 0; j < n; j++) {
             let div = document.createElement("div");
             div.className = "gridElements";
-            // div.addEventListener("mousedown", updateColour);
-            // div.addEventListener("mouseover", updateColour);
+            div.addEventListener("mousedown", updateColour);
+            div.addEventListener("mouseover", updateColour);
             let sketchPad = document.querySelector("#sketch-pad");
             sketchPad.appendChild(div);
         }
     }
+}
+
+// function to change colour of a single cell
+function updateColour(event) {
+    if (event.type === "mouseover" && mouseDown){ 
+        return; // if event is mouseover only while mouseDown
+    }
+    event.target.style.backgroundColor = "black";
 }
 
 // function to update number of columns in style.css
@@ -42,12 +54,6 @@ function resetGrid() {
     resetGrid.innerHTML = " ";
 }
 
-// function to change colour
-function updateColour(event) {
-    if (event.type === "mouseover" && "mousedown"){
-        event.target.style.backgroundColor = "black";
-    }
-}
 
 
 window.onload = () => {
