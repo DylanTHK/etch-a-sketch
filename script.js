@@ -14,14 +14,14 @@ document.body.onmousedown = () => {mouseDown = true};
 document.body.onmouseup = () => {mouseDown = false};
 
 // status variables
-let paintColour = "black";
+let colourStatus = "black"; // default colour
 
 // detect changes to call functions
 gridSlider.onchange = (element) => initialiseGrid(element.target.value);
 grids.onclick = (cell) => updateColour(cell);
-blackButton.addEventListener("click", () => paintColour = "black");
-rainbowButton.addEventListener("click", () => paintColour = "red");
-eraserButton.addEventListener("click", () => paintColour = "white");
+blackButton.addEventListener("click", () => updateColourStatus("black"));
+rainbowButton.addEventListener("click", () => updateColourStatus("rainbow"));
+eraserButton.addEventListener("click", () => updateColourStatus("eraser"));
 clearButton.addEventListener("click", () => initialiseGrid(gridSlider.value));
 
 // function to add number of cells based on slider input
@@ -42,13 +42,30 @@ function initialiseGrid(n) {
     }
 }
 
+function updateColourStatus(colour) {
+    colourStatus = colour;
+    // remove class
+    blackButton.classList.remove("clicked");
+    rainbowButton.classList.remove("clicked");
+    eraserButton.classList.remove("clicked");
+
+    if (colour === "black") {
+        blackButton.classList.add("clicked");
+    } else if (colour === "rainbow") {
+        rainbowButton.classList.add("clicked");
+    } else {
+        eraserButton.classList.add("clicked");
+    }
+
+}
 
 // function to change colour of a single cell
 function updateColour(event) {
     if (event.type === "mouseover" && !mouseDown){ 
         return; // if event is mouseover only while mouseDown
     }
-    event.target.style.backgroundColor = paintColour;
+    // check for colour status
+    event.target.style.backgroundColor = colourStatus;
 }
 
 // function to update number of columns in style.css
