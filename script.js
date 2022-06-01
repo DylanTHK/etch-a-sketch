@@ -43,12 +43,13 @@ function initialiseGrid(n) {
 }
 
 function updateColourStatus(colour) {
+    // update current selected colour
     colourStatus = colour;
-    // remove class
+    
+    // update visuals for colour selection buttons
     blackButton.classList.remove("clicked");
     rainbowButton.classList.remove("clicked");
     eraserButton.classList.remove("clicked");
-
     if (colour === "black") {
         blackButton.classList.add("clicked");
     } else if (colour === "rainbow") {
@@ -65,7 +66,16 @@ function updateColour(event) {
         return; // if event is mouseover only while mouseDown
     }
     // check for colour status
-    event.target.style.backgroundColor = colourStatus;
+    if (colourStatus === "black") {
+        event.target.style.backgroundColor = "black";
+    } else if (colourStatus === "rainbow") {
+        let red = Math.floor(Math.random() * 256);
+        let blue = Math.floor(Math.random() * 256);
+        let green = Math.floor(Math.random() * 256);
+        event.target.style.backgroundColor = `rgb(${red},${green},${blue})`;
+    } else {
+        event.target.style.backgroundColor = "white"
+    }
 }
 
 // function to update number of columns in style.css
