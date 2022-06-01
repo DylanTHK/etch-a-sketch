@@ -78,12 +78,6 @@ function updateColour(event) {
     }
 }
 
-// function to update number of columns in style.css
-function updateCSS(rows) {
-    const root = document.querySelector(":root");
-    root.style.setProperty("--rows", rows);
-}
-
 // function to reset grid when new dimensions are selected
 function resetGrid() {
     const resetGrid = document.getElementById("sketch-pad");
