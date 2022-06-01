@@ -18,6 +18,8 @@
 h1 {
     padding: 1rem;
     font-size: 4rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
 }
 
 #container {
@@ -38,6 +40,7 @@ h1 {
     height: 50px;
     border-radius: 15px;
     font-size: 1.2rem;
+    font-family: 'Space Mono', monospace;
 }
 
 #black:hover, #rainbow:hover, #eraser:hover, #clear:hover {
@@ -49,6 +52,10 @@ h1 {
 .clicked { /* for depressed button */
     background-color: var(--dark);
     color: white;
+}
+
+#gridSizeText {
+    font-family: 'Space Mono', monospace;
 }
 
 #gridSlider {
@@ -118,6 +125,11 @@ footer {
     padding: 2rem;
     font-size: 1.2rem;
 }
+
+footer > p {
+    font-family: 'Space Mono', monospace;
+}
+
 footer > a {
-    margin-left: 5px;
+    margin-left: 10px;
 }
