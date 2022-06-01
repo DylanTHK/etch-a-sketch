@@ -35,8 +35,21 @@
 
 }
 
-.grid-border {
+.grids {
     border: solid .2px rgb(183, 183, 183);
+    background-color: white;
+}
+
+/* .grids:hover {
+    background: black;
+} */
+
+#grid-black {
+    background:black;
+}
+
+#grid-colour {
+    background: red
 }
 
 .fa-github:before {
