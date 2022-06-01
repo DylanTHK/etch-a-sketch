@@ -1,23 +1,29 @@
+// linking variable names to elements
+const blackButton = document.getElementById("black");
+const rainbowButton = document.getElementById("rainbow");
+const eraserButton = document.getElementById("eraser");
+const clearButton = document.getElementById("clear");
 const gridSize = document.getElementById("gridSize"); 
-const gridText = document.getElementById("grid-size-text")
-const grids = document.getElementsByClassName("grids");
+const gridText = document.getElementById("gridSizeText");
+const grids = document.getElementsByClassName("gridElements");
+const gridArea = document.getElementById("sketch-pad");
 
+// detect changes to call functions
 gridSize.onchange = (element) => initialiseGrid(element.target.value);
 grids.onclick = (cell) => updateColour(cell);
 
 // function to add number of cells based on slider input
 function initialiseGrid(n) {
-    // update grid size for user visual
-    gridText.textContent = `${n} x ${n}`;
+    gridText.textContent = `${n} x ${n}`; // update grid size for user visual
     updateCSS(n);
-    // to reset the grid for every change in slider input
-    resetGrid();
-
+    resetGrid(); // to reset the grid for every change in slider input
+    gridArea.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             let div = document.createElement("div");
-            div.className = "grids";
-            // div.addEventListener();
+            div.className = "gridElements";
+            // div.addEventListener("mousedown", updateColour);
+            // div.addEventListener("mouseover", updateColour);
             let sketchPad = document.querySelector("#sketch-pad");
             sketchPad.appendChild(div);
         }
@@ -30,15 +36,17 @@ function updateCSS(rows) {
     root.style.setProperty("--rows", rows);
 }
 
+// function to reset grid when new dimensions are selected
 function resetGrid() {
     const resetGrid = document.getElementById("sketch-pad");
     resetGrid.innerHTML = " ";
 }
 
-
 // function to change colour
-function updateColour(element) {
-    element.target.style.backgroundColor = "black";
+function updateColour(event) {
+    if (event.type === "mouseover" && "mousedown"){
+        event.target.style.backgroundColor = "black";
+    }
 }
 
 
