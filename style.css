@@ -1,3 +1,8 @@
+:root {
+    --gridSize: 500px;
+    --light: rgb(238, 238, 238);
+    --dark: rgb(68, 68, 68);
+}
 
 *,
 *::before,
@@ -5,43 +10,93 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--light);
+}
+
+h1 {
+    padding: 1rem;
+    font-size: 4rem;
 }
 
 #container {
-    display: flex;  
+    display: flex; 
 }
 
 #control-buttons {
     display: flex;
     flex-direction: column;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     padding: 1rem;
-    height: 500px;
+    height: var(--gridSize);
+    width: 250px;
+}
+
+#black, #rainbow, #eraser, #clear {
+    margin: 1rem .5rem;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+}
+
+#black:hover, #rainbow:hover, #eraser:hover, #clear:hover {
+    transform: scale(1.1);
+    background-color: var(--dark);
+    color: white;
+}
+
+.clicked { /* for depressed button */
+    background-color: var(--dark);
+    color: white;
+}
+
+#gridSlider {
+    margin: 1rem .5rem;
+    background: rgb(231, 231, 231);
+    outline: none;
+    border-radius: 0%;
+    color: rgb(68, 68, 68);
+}
+
+input[type='range'] {
+    -webkit-appearance: none;
+    background-color: var(--light);
+}
+  
+input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    border: 1px solid var(--dark);
+    border-radius: 25px;
+    background: var(--light);
+}
+  
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 25px;
+    margin-top: -8px;
+    background: var(--dark);
 }
 
 #sketch-pad {
     display: grid;
-    height: 500px;
-    width: 500px;
-    background-color: beige;
-    padding: 1rem;
+    height: var(--gridSize);
+    width: var(--gridSize);
+    background-color: rgb(68, 68, 68);    
+    padding: .5rem;
     margin-left: 1rem;
     grid-gap: 0px;
     border: solid 1px gray;
+    border-radius: 5px;
 
 }
 
 .gridElements {
     border: solid .2px rgb(183, 183, 183);
     background-color: white;
-}
-
-#grid-black {
-    background:black;
-}
-
-#grid-colour {
-    background: red
+    user-select: none;
 }
 
 .fa-github:before {
@@ -60,4 +115,9 @@
 
 footer {
     display: flex;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+footer > a {
+    margin-left: 5px;
 }
