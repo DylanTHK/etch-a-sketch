@@ -27,7 +27,6 @@ clearButton.addEventListener("click", () => initialiseGrid(gridSlider.value));
 // function to add number of cells based on slider input
 function initialiseGrid(n) {
     gridText.textContent = `${n} x ${n}`; // update grid size for user visual
-    updateCSS(n);
     resetGrid(); // to reset the grid for every change in slider input
     gridArea.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
     for (let i = 0; i < n; i++) {
@@ -77,6 +76,8 @@ function updateColour(event) {
         event.target.style.backgroundColor = "white"
     }
 }
+
+
 
 // function to reset grid when new dimensions are selected
 function resetGrid() {
