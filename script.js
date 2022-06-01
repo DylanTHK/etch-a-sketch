@@ -8,13 +8,21 @@ const gridText = document.getElementById("gridSizeText");
 const grids = document.getElementsByClassName("gridElements");
 const gridArea = document.getElementById("sketch-pad");
 
+// condition to detect when mouse is pressedon grid
 let mouseDown = false;
 document.body.onmousedown = () => {mouseDown = true};
 document.body.onmouseup = () => {mouseDown = false};
 
+// status variables
+let paintColour = "black";
+
 // detect changes to call functions
 gridSize.onchange = (element) => initialiseGrid(element.target.value);
 grids.onclick = (cell) => updateColour(cell);
+blackButton.addEventListener("click", () => paintColour = "black");
+rainbowButton.addEventListener("click", () => paintColour = "red");
+eraserButton.addEventListener("click", () => paintColour = "white");
+clearButton.addEventListener("click", () => initialiseGrid(gridSize.value));
 
 // function to add number of cells based on slider input
 function initialiseGrid(n) {
@@ -34,12 +42,13 @@ function initialiseGrid(n) {
     }
 }
 
+
 // function to change colour of a single cell
 function updateColour(event) {
-    if (event.type === "mouseover" && mouseDown){ 
+    if (event.type === "mouseover" && !mouseDown){ 
         return; // if event is mouseover only while mouseDown
     }
-    event.target.style.backgroundColor = "black";
+    event.target.style.backgroundColor = paintColour;
 }
 
 // function to update number of columns in style.css
@@ -54,8 +63,7 @@ function resetGrid() {
     resetGrid.innerHTML = " ";
 }
 
-
-
+// when window initialised, call start building sketch pad
 window.onload = () => {
     initialiseGrid(gridSize.value);
 }
